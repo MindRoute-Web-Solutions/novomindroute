@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MindRoute Web Solutions — Sites que convertem</title>
+    <meta name="description" content="Criação de sites rápidos, responsivos e otimizados para conversão. Landing pages, sites institucionais e páginas de vendas com a MindRoute Web Solutions.">
+    
+    <!-- Favicon -->
+    <link rel="icon" href="images/logo-site.png" type="image/png">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+    <!-- Header Fixo -->
+    <header id="header">
+        <div class="container">
+            <div class="logo">
+                <h2>MindRoute</h2>
+            </div>
+            <nav class="navbar">
+                <ul class="nav-menu">
+                    <li><a href="#home" class="nav-link">Home</a></li>
+                    <li><a href="#servicos" class="nav-link">Serviços</a></li>
+                    <li><a href="#portfolio" class="nav-link">Portfólio</a></li>
+                    <li><a href="#importancia" class="nav-link">Importância</a></li>
+                    <li><a href="#faq" class="nav-link">FAQ</a></li>
+                    <li><a href="#sobre" class="nav-link">Sobre</a></li>
+                    <li><a href="#contato" class="nav-link">Contato</a></li>
+                </ul>
+                <div class="hamburger">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </div>
+            </nav>
+            <a href="#contato" class="btn-cta">Solicitar Orçamento</a>
+        </div>
+    </header>
+
+    <!-- Hero Section com Banner -->
+    <section id="home" class="hero">
+        <div class="hero-banner">
+            <div class="container">
+                <div class="hero-content">
+                    <h1>Sites que vendem — criados para resultados</h1>
+                    <p>Design estratégico, performance e SEO técnico para marcas locais que querem mais clientes.</p>
+                    <div class="hero-buttons">
+                        <a href="#contato" class="btn-primary">Solicitar Orçamento</a>
+                        <a href="#portfolio" class="btn-secondary">Ver Portfólio</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Serviços Section -->
+    <section id="servicos" class="servicos">
+        <div class="container">
+            <h2 class="section-title">Nossos Serviços</h2>
+            <div class="servicos-grid">
+                <div class="servico-card">
+                    <i class="fas fa-laptop-code"></i>
+                    <h3>Criação de Websites</h3>
+                    <p>Desenvolvemos sites completos para empresas, desde páginas simples de apresentação até sites mais complexos com várias seções.</p>
+                </div>
+                <div class="servico-card">
+                    <i class="fas fa-rocket"></i>
+                    <h3>Landing Pages</h3>
+                    <p>Criamos páginas de alta conversão, focadas em campanhas de marketing, para capturar leads ou vender um produto específico.</p>
+                </div>
+                <div class="servico-card">
+                    <i class="fas fa-blog"></i>
+                    <h3>Blogs e Portfólios</h3>
+                    <p>Construímos blogs para criadores de conteúdo ou sites de portfólio para profissionais mostrarem suas habilidades e experiência.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfólio Section -->
+    <section id="portfolio" class="portfolio">
+        <div class="container">
+            <h2 class="section-title">Nosso Portfólio</h2>
+            <div class="portfolio-grid">
+                <div class="portfolio-item" data-id="1">
+                    <img src="images/portfolio-1.jpg" alt="Projeto 1">
+                    <div class="portfolio-overlay">
+                        <h3>Site Institucional - Empresa X</h3>
+                        <p>Clique para ver mais</p>
+                    </div>
+                </div>
+                <div class="portfolio-item" data-id="2">
+                    <img src="images/portfolio-2.jpg" alt="Projeto 2">
+                    <div class="portfolio-overlay">
+                        <h3>Landing Page - Produto Y</h3>
+                        <p>Clique para ver mais</p>
+                    </div>
+                </div>
+                <div class="portfolio-item" data-id="3">
+                    <img src="images/portfolio-3.jpg" alt="Projeto 3">
+                    <div class="portfolio-overlay">
+                        <h3>Blog - Especialista A</h3>
+                        <p>Clique para ver mais</p>
+                    </div>
+                </div>
+                <div class="portfolio-item" data-id="4">
+                    <img src="images/portfolio-4.jpg" alt="Projeto 4">
+                    <div class="portfolio-overlay">
+                        <h3>Portfólio - Designer B</h3>
+                        <p>Clique para ver mais</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modal Portfolio -->
+    <div id="portfolio-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <div class="modal-body">
+                <img id="modal-img" src="" alt="">
+                <div class="modal-text">
+                    <h3 id="modal-title"></h3>
+                    <p id="modal-description"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Importância Section -->
+    <section id="importancia" class="importancia">
+        <div class="container">
+            <h2 class="section-title">Por que sua empresa precisa estar online?</h2>
+            <div class="importancia-grid">
+                <div class="importancia-item">
+                    <i class="fas fa-mobile-alt"></i>
+                    <h3>Presença Digital</h3>
+                    <p>Estabeleça credibilidade e esteja disponível 24/7 para seus clientes potenciais.</p>
+                </div>
+                <div class="importancia-item">
+                    <i class="fas fa-globe"></i>
+                    <h3>Alcance Global</h3>
+                    <p>Atinja clientes além da sua localidade física e expanda seu mercado.</p>
+                </div>
+                <div class="importancia-item">
+                    <i class="fas fa-chart-line"></i>
+                    <h3>Crescimento</h3>
+                    <p>Transforme visitantes em clientes com estratégias digitais eficientes.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section id="faq" class="faq">
+        <div class="container">
+            <h2 class="section-title">Dúvidas Frequentes</h2>
+            <div class="faq-container">
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>Quanto tempo leva para criar meu site?</h3>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>O prazo médio para desenvolvimento de um site é de 15 a 30 dias, dependendo da complexidade do projeto e do fornecimento de conteúdo por parte do cliente.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>Preciso já ter domínio e hospedagem?</h3>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Não é obrigatório. Podemos auxiliar na aquisição do domínio e contratação da hospedagem, ou você pode fornecer suas credenciais caso já possua.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>Vocês otimizam para celular?</h3>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Sim, todos os nossos sites são desenvolvidos com design responsivo, garantindo uma experiência otimizada em smartphones, tablets e desktops.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>O site é preparado para aparecer no Google?</h3>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Sim, implementamos as melhores práticas de SEO técnico durante o desenvolvimento para garantir que seu site tenha boa indexação nos mecanismos de busca.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>Como funciona o suporte após a entrega?</h3>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Oferecemos pacotes de suporte mensal que incluem atualizações de segurança, backups e correções. O primeiro mês de suporte é incluso na entrega do projeto.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sobre Section -->
+    <section id="sobre" class="sobre">
+        <div class="container">
+            <div class="sobre-content">
+                <div class="sobre-text">
+                    <h2 class="section-title">Sobre a MindRoute</h2>
+                    <p>A MindRoute Web Solutions é uma agência especializada em desenvolvimento web estratégico, focada em criar soluções digitais que geram resultados tangíveis para nossos clientes.</p>
+                    <div class="sobre-info">
+                        <div class="info-item">
+                            <h3>Missão</h3>
+                            <p>Desenvolver sites que não apenas impressionam visualmente, mas que também convertem visitantes em clientes, impulsionando o crescimento dos negócios.</p>
+                        </div>
+                        <div class="info-item">
+                            <h3>Visão</h3>
+                            <p>Ser referência em desenvolvimento web no Brasil, reconhecida pela qualidade técnica e pelos resultados entregues aos nossos clientes.</p>
+                        </div>
+                        <div class="info-item">
+                            <h3>Valores</h3>
+                            <p>Comprometimento com resultados, transparência, inovação constante e parceria de longo prazo com nossos clientes.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="sobre-image">
+                    <img src="images/sobre2.png" alt="Equipe MindRoute">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contato Section -->
+    <section id="contato" class="contato">
+        <div class="container">
+            <h2 class="section-title">Entre em Contato</h2>
+            <div class="contato-content">
+                <div class="contato-form">
+                    <form id="contact-form">
+                        <div class="form-group">
+                            <input type="text" id="nome" name="nome" required>
+                            <label for="nome">Nome completo</label>
+                        </div>
+                        <div class="form-group">
+                            <input type="email" id="email" name="email" required>
+                            <label for="email">E-mail</label>
+                        </div>
+                        <div class="form-group">
+                            <input type="tel" id="telefone" name="telefone" required>
+                            <label for="telefone">Telefone</label>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" id="empresa" name="empresa" required>
+                            <label for="empresa">Empresa</label>
+                        </div>
+                        <div class="form-group">
+                            <select id="servico" name="servico" required>
+                                <option value="" disabled selected>Selecione um serviço</option>
+                                <option value="criacao-websites">Criação de Websites</option>
+                                <option value="landing-pages">Landing Pages</option>
+                                <option value="blogs-portfolios">Blogs e Portfólios</option>
+                            </select>
+                            <label for="servico">Serviço de interesse</label>
+                        </div>
+                        <div class="form-group">
+                            <textarea id="mensagem" name="mensagem" rows="5" required></textarea>
+                            <label for="mensagem">Mensagem</label>
+                        </div>
+                        <button type="submit" class="btn-primary">Enviar Mensagem</button>
+                    </form>
+                    <div id="form-success" class="form-success">
+                        <p>Mensagem enviada — respondemos em até 24h.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Botão WhatsApp Flutuante -->
+    <a href="https://wa.me/5511999999999" class="whatsapp-float" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- Botão Voltar ao Topo -->
+    <a href="#home" class="back-to-top">
+        <i class="fas fa-chevron-up"></i>
+    </a>
+
+    <!-- Footer Profissional -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <h2>MindRoute</h2>
+                        <p>Criamos soluções digitais que transformam visitantes em clientes.</p>
+                    </div>
+                    <div class="footer-social">
+                        <a href="#" aria-label="Instagram" class="social-link">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" aria-label="LinkedIn" class="social-link">
+                            <i class="fab fa-linkedin"></i>
+                        </a>
+                        <a href="https://wa.me/5511999999999" aria-label="WhatsApp" class="social-link" target="_blank">
+                            <i class="fab fa-whatsapp"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="footer-section accordion-section">
+                    <h3 class="accordion-toggle">Serviços <i class="fas fa-chevron-down"></i></h3>
+                    <ul class="footer-links accordion-content">
+                        <li><a href="#servicos">Criação de Websites</a></li>
+                        <li><a href="#servicos">Landing Pages</a></li>
+                        <li><a href="#servicos">Blogs e Portfólios</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section accordion-section">
+                    <h3 class="accordion-toggle">Links Rápidos <i class="fas fa-chevron-down"></i></h3>
+                    <ul class="footer-links accordion-content">
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#portfolio">Portfólio</a></li>
+                        <li><a href="#sobre">Sobre Nós</a></li>
+                        <li><a href="#faq">FAQ</a></li>
+                        <li><a href="#contato">Contato</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section accordion-section">
+                    <h3 class="accordion-toggle">Contato <i class="fas fa-chevron-down"></i></h3>
+                    <div class="contact-info accordion-content">
+                        <div class="contact-item">
+                            <i class="fas fa-envelope"></i>
+                            <span>contato@mindroute.com</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-phone"></i>
+                            <span>(11) 99999-9999</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>São Paulo, SP</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-clock"></i>
+                            <span>Seg - Sex: 9h às 18h</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <div class="footer-bottom-content">
+                    <p>&copy; 2023 MindRoute Web Solutions. Todos os direitos reservados.</p>
+                    <div class="footer-legal">
+                        <a href="#">Política de Privacidade</a>
+                        <a href="#">Termos de Uso</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="js/script.js"></script>
+    <script src="js/scriptresponsive.js"></script>
+</body>
+</html>

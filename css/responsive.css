@@ -1,0 +1,521 @@
+/* Telas grandes: 2560px+ */
+@media (min-width: 2560px) {
+    .container {
+        max-width: 1440px;
+    }
+}
+
+/* Laptops/Desktops: 1366px–1920px */
+@media (max-width: 1920px) and (min-width: 1366px) {
+    /* Estilos já aplicados no CSS principal */
+}
+
+/* Tablets: 768px–1280px */
+@media (max-width: 1280px) and (min-width: 768px) {
+    h1 {
+        font-size: 2.5rem;
+    }
+    
+    h2 {
+        font-size: 2rem;
+    }
+    
+    .hero-banner {
+        min-height: 70vh;
+    }
+    
+    .sobre-content {
+        flex-direction: column;
+    }
+    
+    .sobre-text {
+        margin-bottom: 30px;
+    }
+    
+    /* Footer Responsivo para Tablets */
+    .footer-content {
+        grid-template-columns: 1fr 1fr;
+        gap: 30px;
+    }
+    
+    .footer-section:first-child {
+        grid-column: 1 / -1;
+    }
+    
+    .footer-bottom-content {
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+    }
+    
+    /* Ajustes para botões flutuantes em tablets */
+    .whatsapp-float {
+        bottom: 100px;
+        right: 30px;
+    }
+    
+    .back-to-top {
+        bottom: 170px;
+        right: 30px;
+    }
+}
+
+/* Mobile: até 768px */
+@media (max-width: 768px) {
+    .container {
+        width: 95%;
+    }
+    
+    h1 {
+        font-size: 2rem;
+    }
+    
+    h2 {
+        font-size: 1.8rem;
+    }
+    
+    h3 {
+        font-size: 1.3rem;
+    }
+    
+    /* Header */
+    .nav-menu {
+        position: fixed;
+        top: 70px;
+        left: -100%;
+        width: 100%;
+        flex-direction: column;
+        background-color: var(--white);
+        text-align: center;
+        transition: 0.3s;
+        box-shadow: 0 10px 27px rgba(0, 0, 0, 0.05);
+        z-index: 999;
+    }
+    
+    .nav-menu.active {
+        left: 0;
+    }
+    
+    .nav-link {
+        padding: 15px;
+        display: block;
+        border-bottom: 1px solid var(--gray-light);
+    }
+    
+    .hamburger {
+        display: flex;
+    }
+    
+    .hamburger.active .bar:nth-child(2) {
+        opacity: 0;
+    }
+    
+    .hamburger.active .bar:nth-child(1) {
+        transform: translateY(8px) rotate(45deg);
+    }
+    
+    .hamburger.active .bar:nth-child(3) {
+        transform: translateY(-8px) rotate(-45deg);
+    }
+    
+    .btn-cta {
+        display: none;
+    }
+    
+    /* Hero Banner */
+    .hero {
+        margin-top: 70px;
+    }
+    
+    .hero-banner {
+        min-height: 80vh;
+        text-align: center;
+        padding: 40px 0;
+    }
+    
+    .hero-content {
+        max-width: 100%;
+    }
+    
+    .hero-buttons {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .btn-primary, .btn-secondary {
+        width: 100%;
+        max-width: 300px;
+        margin: 0 auto;
+    }
+    
+    /* Serviços */
+    .servicos {
+        padding: 80px 0;
+    }
+    
+    .servicos-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    /* Portfólio */
+    .portfolio {
+        padding: 80px 0;
+    }
+    
+    .portfolio-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    /* Importância */
+    .importancia {
+        padding: 80px 0;
+    }
+    
+    .importancia-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    /* FAQ */
+    .faq {
+        padding: 80px 0;
+    }
+    
+    .faq-question h3 {
+        font-size: 1.1rem;
+        margin-right: 15px;
+    }
+    
+    /* Sobre */
+    .sobre {
+        padding: 80px 0;
+    }
+    
+    .sobre-content {
+        flex-direction: column;
+    }
+    
+    .sobre-text {
+        margin-bottom: 30px;
+    }
+    
+    /* Contato */
+    .contato {
+        padding: 80px 0;
+    }
+    
+    /* Footer Responsivo para Mobile - COM ACCORDION FUNCIONAL */
+    .footer {
+        padding: 40px 0 0;
+    }
+    
+    .footer-content {
+        grid-template-columns: 1fr;
+        gap: 0;
+    }
+    
+    .footer-section {
+        border-bottom: 1px solid #334155;
+        padding: 20px 0;
+    }
+    
+    .footer-section:last-child {
+        border-bottom: none;
+    }
+    
+    .footer-section h3::after {
+        left: 50%;
+        transform: translateX(-50%);
+    }
+    
+    .footer-social {
+        justify-content: center;
+    }
+    
+    .footer-links a:hover {
+        padding-left: 0;
+    }
+    
+    .footer-links a::before {
+        display: none;
+    }
+    
+    .contact-item {
+        justify-content: center;
+    }
+    
+    .footer-bottom-content {
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+    }
+    
+    .footer-legal {
+        justify-content: center;
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    /* Accordion para mobile - COM CSS PURO (FUNCIONAL) */
+    .accordion-section .accordion-toggle {
+        cursor: pointer;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding-right: 20px;
+        user-select: none;
+        margin-bottom: 0;
+        transition: all 0.3s ease;
+    }
+    
+    .accordion-section .accordion-toggle:hover {
+        color: var(--light-blue);
+    }
+    
+    .accordion-section .accordion-toggle i {
+        transition: transform 0.3s ease;
+        display: block !important;
+    }
+    
+    /* Esconder inputs radio */
+    .accordion-input {
+        display: none;
+    }
+    
+    /* Controlar accordion com CSS puro */
+    .accordion-content {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease;
+        display: none;
+    }
+    
+    .accordion-input:checked + .accordion-toggle i {
+        transform: rotate(180deg);
+    }
+    
+    .accordion-input:checked + .accordion-toggle + .accordion-content {
+        max-height: 500px;
+        margin-top: 15px;
+        display: block;
+    }
+    
+    /* Primeira seção (logo) sempre visível */
+    .footer-section:first-child .accordion-content {
+        max-height: none;
+        display: block !important;
+    }
+    
+    .footer-section:first-child .accordion-toggle {
+        cursor: default;
+        padding-right: 0;
+    }
+    
+    .footer-section:first-child .accordion-toggle i {
+        display: none !important;
+    }
+    
+    .footer-section:first-child .accordion-toggle:hover {
+        color: inherit;
+    }
+    
+    /* Botões flutuantes em mobile */
+    .whatsapp-float {
+        width: 50px;
+        height: 50px;
+        font-size: 1.3rem;
+        bottom: 100px;
+        right: 20px;
+    }
+    
+    .back-to-top {
+        width: 45px;
+        height: 45px;
+        font-size: 1.1rem;
+        bottom: 160px;
+        right: 20px;
+    }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Mobile pequeno: 360px–430px */
+@media (max-width: 430px) and (min-width: 360px) {
+    h1 {
+        font-size: 1.8rem;
+    }
+    
+    h2 {
+        font-size: 1.6rem;
+    }
+    
+    .hero-content p {
+        font-size: 1rem;
+    }
+    
+    .servico-card, .importancia-item {
+        padding: 20px;
+    }
+    
+    .modal-content {
+        width: 95%;
+        margin: 10% auto;
+    }
+    
+    .modal-body img {
+        height: 250px;
+    }
+    
+    .modal-text {
+        padding: 20px;
+    }
+    
+    /* Footer Mobile Pequeno */
+    .footer {
+        padding: 30px 0 0;
+    }
+    
+    .footer-content {
+        gap: 0;
+    }
+    
+    .footer-section {
+        padding: 15px 0;
+    }
+    
+    .footer-section h3 {
+        font-size: 1.1rem;
+        margin-bottom: 15px;
+    }
+    
+    .footer-logo h2 {
+        font-size: 1.8rem;
+    }
+    
+    .footer-logo p {
+        font-size: 0.9rem;
+    }
+    
+    .footer-social {
+        gap: 10px;
+    }
+    
+    .social-link {
+        width: 35px;
+        height: 35px;
+    }
+    
+    .footer-links li {
+        margin-bottom: 8px;
+    }
+    
+    .contact-info {
+        gap: 12px;
+    }
+    
+    .contact-item {
+        font-size: 0.9rem;
+    }
+    
+    .footer-bottom {
+        padding: 20px 0;
+    }
+    
+    .footer-bottom-content {
+        font-size: 0.8rem;
+    }
+    
+    /* Botões flutuantes em mobile pequeno */
+    .whatsapp-float {
+        width: 45px;
+        height: 45px;
+        font-size: 1.2rem;
+        bottom: 90px;
+        right: 15px;
+    }
+    
+    .back-to-top {
+        width: 40px;
+        height: 40px;
+        font-size: 1rem;
+        bottom: 145px;
+        right: 15px;
+    }
+}
+
+/* Ajustes específicos para orientação landscape em mobile */
+@media (max-width: 768px) and (orientation: landscape) {
+    .hero-banner {
+        min-height: 100vh;
+    }
+    
+    .footer-content {
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+    }
+    
+    .footer-section:first-child {
+        grid-column: 1 / -1;
+    }
+}
+
+/* Ajustes para telas muito pequenas (menos de 360px) */
+@media (max-width: 359px) {
+    .footer {
+        padding: 25px 0 0;
+    }
+    
+    .footer-content {
+        gap: 0;
+    }
+    
+    .footer-section {
+        padding: 12px 0;
+    }
+    
+    .footer-section h3 {
+        font-size: 1rem;
+    }
+    
+    .footer-logo h2 {
+        font-size: 1.6rem;
+    }
+    
+    .social-link {
+        width: 32px;
+        height: 32px;
+        font-size: 0.9rem;
+    }
+    
+    .footer-links a {
+        font-size: 0.9rem;
+    }
+    
+    .contact-item {
+        font-size: 0.85rem;
+    }
+    
+    /* Botões flutuantes em telas muito pequenas */
+    .whatsapp-float {
+        width: 40px;
+        height: 40px;
+        font-size: 1.1rem;
+        bottom: 80px;
+        right: 10px;
+    }
+    
+    .back-to-top {
+        width: 35px;
+        height: 35px;
+        font-size: 0.9rem;
+        bottom: 130px;
+        right: 10px;
+    }
+}
+
+/* Dobráveis: 375px–1200px - adaptação fluída */
+@media (max-width: 1200px) and (min-width: 375px) {
+    /* Ajustes já cobertos nas media queries anteriores */
+}
