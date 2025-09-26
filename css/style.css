@@ -181,7 +181,7 @@ a {
 }
 
 .hero-banner {
-    background: linear-gradient(135deg, rgba(30, 64, 175, 0.8) 0%, rgba(59, 130, 246, 0.8) 100%), url('images/banner-hero.jpg') center/cover no-repeat;
+    background: linear-gradient(135deg, rgba(42, 51, 83, 0.373) 0%), url('../images/banner3.png') center/cover no-repeat;
     min-height: 90vh;
     display: flex;
     align-items: center;
