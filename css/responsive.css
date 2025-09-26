@@ -5,11 +5,6 @@
     }
 }
 
-/* Laptops/Desktops: 1366px–1920px */
-@media (max-width: 1920px) and (min-width: 1366px) {
-    /* Estilos já aplicados no CSS principal */
-}
-
 /* Tablets: 768px–1280px */
 @media (max-width: 1280px) and (min-width: 768px) {
     h1 {
@@ -78,7 +73,7 @@
         font-size: 1.3rem;
     }
     
-    /* Header */
+    /* Header Mobile */
     .nav-menu {
         position: fixed;
         top: 70px;
@@ -122,7 +117,7 @@
         display: none;
     }
     
-    /* Hero Banner */
+    /* Hero Banner Mobile */
     .hero {
         margin-top: 70px;
     }
@@ -148,7 +143,7 @@
         margin: 0 auto;
     }
     
-    /* Serviços */
+    /* Serviços Mobile */
     .servicos {
         padding: 80px 0;
     }
@@ -157,7 +152,7 @@
         grid-template-columns: 1fr;
     }
     
-    /* Portfólio */
+    /* Portfólio Mobile */
     .portfolio {
         padding: 80px 0;
     }
@@ -166,7 +161,7 @@
         grid-template-columns: 1fr;
     }
     
-    /* Importância */
+    /* Importância Mobile */
     .importancia {
         padding: 80px 0;
     }
@@ -175,7 +170,7 @@
         grid-template-columns: 1fr;
     }
     
-    /* FAQ */
+    /* FAQ Mobile */
     .faq {
         padding: 80px 0;
     }
@@ -185,7 +180,7 @@
         margin-right: 15px;
     }
     
-    /* Sobre */
+    /* Sobre Mobile */
     .sobre {
         padding: 80px 0;
     }
@@ -198,12 +193,29 @@
         margin-bottom: 30px;
     }
     
-    /* Contato */
+    /* Contato Mobile */
     .contato {
         padding: 80px 0;
     }
     
-    /* Footer Responsivo para Mobile - COM ACCORDION FUNCIONAL */
+    /* CORREÇÃO: Problema do select no formulário em mobile */
+    .form-group select {
+        font-size: 16px;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%236b7280' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+        background-repeat: no-repeat;
+        background-position: right 15px center;
+        background-size: 16px;
+        padding-right: 45px;
+    }
+    
+    .form-group select:focus {
+        background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%231e40af' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+    }
+    
+    /* FOOTER MOBILE COM ACCORDION */
     .footer {
         padding: 40px 0 0;
     }
@@ -215,6 +227,11 @@
     
     .footer-section {
         border-bottom: 1px solid #334155;
+        padding: 0;
+    }
+    
+    .footer-section:first-child {
+        border-bottom: 1px solid #334155;
         padding: 20px 0;
     }
     
@@ -222,25 +239,57 @@
         border-bottom: none;
     }
     
-    .footer-section h3::after {
-        left: 50%;
-        transform: translateX(-50%);
+    /* Accordion Styles para Mobile */
+    .accordion-toggle {
+        display: flex !important;
+    }
+    
+    .accordion-toggle i {
+        font-size: 0.9rem;
+        transition: transform 0.3s ease;
+    }
+    
+    .accordion-content {
+        max-height: 0;
+        overflow: hidden;
+    }
+    
+    .footer-section.active .accordion-content {
+        max-height: 500px;
+        padding-bottom: 20px;
+    }
+    
+    .footer-section.active .accordion-toggle i {
+        transform: rotate(180deg);
+    }
+    
+    /* Esconder os títulos h3 no mobile e mostrar accordion */
+    .footer-section h3 {
+        display: none;
+    }
+    
+    .footer-links {
+        margin: 0;
+        padding: 0;
+    }
+    
+    .footer-links li {
+        margin-bottom: 10px;
+    }
+    
+    .footer-links a {
+        padding: 8px 0;
+        display: block;
+    }
+    
+    .contact-info a.contact-item {
+        padding: 8px 0;
+        display: flex;
     }
     
     .footer-social {
         justify-content: center;
-    }
-    
-    .footer-links a:hover {
-        padding-left: 0;
-    }
-    
-    .footer-links a::before {
-        display: none;
-    }
-    
-    .contact-item {
-        justify-content: center;
+        margin-top: 15px;
     }
     
     .footer-bottom-content {
@@ -251,71 +300,7 @@
     
     .footer-legal {
         justify-content: center;
-        flex-direction: column;
-        gap: 10px;
-    }
-    
-    /* Accordion para mobile - COM CSS PURO (FUNCIONAL) */
-    .accordion-section .accordion-toggle {
-        cursor: pointer;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding-right: 20px;
-        user-select: none;
-        margin-bottom: 0;
-        transition: all 0.3s ease;
-    }
-    
-    .accordion-section .accordion-toggle:hover {
-        color: var(--light-blue);
-    }
-    
-    .accordion-section .accordion-toggle i {
-        transition: transform 0.3s ease;
-        display: block !important;
-    }
-    
-    /* Esconder inputs radio */
-    .accordion-input {
-        display: none;
-    }
-    
-    /* Controlar accordion com CSS puro */
-    .accordion-content {
-        max-height: 0;
-        overflow: hidden;
-        transition: max-height 0.3s ease;
-        display: none;
-    }
-    
-    .accordion-input:checked + .accordion-toggle i {
-        transform: rotate(180deg);
-    }
-    
-    .accordion-input:checked + .accordion-toggle + .accordion-content {
-        max-height: 500px;
-        margin-top: 15px;
-        display: block;
-    }
-    
-    /* Primeira seção (logo) sempre visível */
-    .footer-section:first-child .accordion-content {
-        max-height: none;
-        display: block !important;
-    }
-    
-    .footer-section:first-child .accordion-toggle {
-        cursor: default;
-        padding-right: 0;
-    }
-    
-    .footer-section:first-child .accordion-toggle i {
-        display: none !important;
-    }
-    
-    .footer-section:first-child .accordion-toggle:hover {
-        color: inherit;
+        flex-wrap: wrap;
     }
     
     /* Botões flutuantes em mobile */
@@ -336,9 +321,25 @@
     }
 }
 
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(-10px); }
-    to { opacity: 1; transform: translateY(0); }
+/* Desktop: acima de 768px - Esconder accordion */
+@media (min-width: 769px) {
+    .accordion-toggle {
+        display: none !important;
+    }
+    
+    .footer-section h3 {
+        display: block !important;
+    }
+    
+    .accordion-content {
+        max-height: none !important;
+        overflow: visible !important;
+        display: block !important;
+    }
+    
+    .footer-section {
+        padding: 0 !important;
+    }
 }
 
 /* Mobile pequeno: 360px–430px */
@@ -382,12 +383,11 @@
     }
     
     .footer-section {
-        padding: 15px 0;
+        padding: 0;
     }
     
-    .footer-section h3 {
-        font-size: 1.1rem;
-        margin-bottom: 15px;
+    .footer-section:first-child {
+        padding: 15px 0;
     }
     
     .footer-logo h2 {
@@ -471,12 +471,8 @@
         gap: 0;
     }
     
-    .footer-section {
+    .footer-section:first-child {
         padding: 12px 0;
-    }
-    
-    .footer-section h3 {
-        font-size: 1rem;
     }
     
     .footer-logo h2 {
@@ -515,7 +511,47 @@
     }
 }
 
-/* Dobráveis: 375px–1200px - adaptação fluída */
-@media (max-width: 1200px) and (min-width: 375px) {
-    /* Ajustes já cobertos nas media queries anteriores */
+/* Animações */
+@keyframes fadeIn {
+    from { 
+        opacity: 0; 
+        transform: translateY(-10px); 
+    }
+    to { 
+        opacity: 1; 
+        transform: translateY(0); 
+    }
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateX(-100%);
+    }
+    to {
+        transform: translateX(0);
+    }
+}
+
+/* Utilidades para animações */
+.fade-in {
+    animation: fadeIn 0.6s ease-in-out;
+}
+
+.slide-down {
+    animation: slideDown 0.5s ease-out;
+}
+
+.slide-in {
+    animation: slideIn 0.4s ease-out;
 }

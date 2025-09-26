@@ -53,7 +53,7 @@ const modalImg = document.getElementById('modal-img');
 const modalTitle = document.getElementById('modal-title');
 const modalDescription = document.getElementById('modal-description');
 
-// Dados dos projetos (simulados)
+// Dados dos projetos
 const portfolioData = {
     1: {
         title: 'Site Institucional - Empresa X',
@@ -88,7 +88,7 @@ portfolioItems.forEach(item => {
             modalTitle.textContent = project.title;
             modalDescription.textContent = project.description;
             modal.style.display = 'block';
-            document.body.style.overflow = 'hidden'; // Impede scroll do body
+            document.body.style.overflow = 'hidden';
         }
     });
 });
@@ -113,14 +113,12 @@ faqItems.forEach(item => {
     const question = item.querySelector('.faq-question');
     
     question.addEventListener('click', () => {
-        // Fecha todas as outras FAQs
         faqItems.forEach(otherItem => {
             if (otherItem !== item) {
                 otherItem.classList.remove('active');
             }
         });
         
-        // Abre/Fecha a FAQ clicada
         item.classList.toggle('active');
     });
 });
@@ -132,13 +130,18 @@ const formSuccess = document.getElementById('form-success');
 contactForm.addEventListener('submit', (e) => {
     e.preventDefault();
     
-    // Simulação de envio (em um caso real, aqui seria uma requisição AJAX)
+    // Coletar dados do formulário
+    const formData = new FormData(contactForm);
+    const data = Object.fromEntries(formData);
+    
+    // Aqui você pode adicionar o código para enviar para um servidor
+    console.log('Dados do formulário:', data);
+    
     setTimeout(() => {
         contactForm.reset();
         contactForm.style.display = 'none';
         formSuccess.style.display = 'block';
         
-        // Restaura o formulário após 5 segundos (apenas para demonstração)
         setTimeout(() => {
             formSuccess.style.display = 'none';
             contactForm.style.display = 'block';
@@ -146,13 +149,12 @@ contactForm.addEventListener('submit', (e) => {
     }, 1000);
 });
 
-// Efeito de preenchimento automático dos campos do formulário
+// Efeito de preenchimento automático dos campos
 const formGroups = document.querySelectorAll('.form-group');
 
 formGroups.forEach(group => {
     const input = group.querySelector('input, select, textarea');
     
-    // Verifica se o campo já tem valor ao carregar a página
     if (input.value) {
         input.parentNode.classList.add('filled');
     }
@@ -194,5 +196,78 @@ backToTopButton.addEventListener('click', (e) => {
     window.scrollTo({
         top: 0,
         behavior: 'smooth'
+    });
+});
+
+// Accordion para footer mobile
+function initFooterAccordion() {
+    const footerSections = document.querySelectorAll('.footer-section');
+    const windowWidth = window.innerWidth;
+    
+    if (windowWidth <= 768) {
+        // Comportamento para mobile - accordion
+        footerSections.forEach((section, index) => {
+            // Pular a primeira seção (logo)
+            if (index === 0) return;
+            
+            // Criar botão accordion
+            const toggle = document.createElement('button');
+            toggle.className = 'accordion-toggle';
+            toggle.innerHTML = `
+                <span>${section.querySelector('h3').textContent}</span>
+                <i class="fas fa-chevron-down"></i>
+            `;
+            
+            // Inserir antes do conteúdo
+            section.insertBefore(toggle, section.firstChild);
+            
+            // Fechar todos os accordions inicialmente
+            section.classList.remove('active');
+            
+            toggle.addEventListener('click', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                
+                // Fechar todos os outros accordions
+                footerSections.forEach(otherSection => {
+                    if (otherSection !== section && otherSection !== footerSections[0]) {
+                        otherSection.classList.remove('active');
+                    }
+                });
+                
+                // Alternar o accordion clicado
+                section.classList.toggle('active');
+            });
+        });
+        
+        // Fechar accordions ao clicar fora
+        document.addEventListener('click', function(e) {
+            if (!e.target.closest('.footer-section')) {
+                footerSections.forEach(section => {
+                    if (section !== footerSections[0]) {
+                        section.classList.remove('active');
+                    }
+                });
+            }
+        });
+    } else {
+        // Comportamento para desktop - remover accordion
+        footerSections.forEach(section => {
+            const toggle = section.querySelector('.accordion-toggle');
+            if (toggle) {
+                toggle.remove();
+            }
+            section.classList.add('active');
+        });
+    }
+}
+
+// Inicializar quando o DOM estiver pronto
+document.addEventListener('DOMContentLoaded', function() {
+    initFooterAccordion();
+    
+    // Re-inicializar ao redimensionar
+    window.addEventListener('resize', function() {
+        initFooterAccordion();
     });
 });

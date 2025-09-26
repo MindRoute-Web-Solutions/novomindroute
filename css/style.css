@@ -177,11 +177,11 @@ a {
 .hero {
     padding: 0;
     position: relative;
-    margin-top: 70px; /* Compensa a altura do header fixo */
+    margin-top: 70px;
 }
 
 .hero-banner {
-    background: linear-gradient(135deg, rgba(32, 33, 34, 0.371) 0%), url('../images/banner3.png') center/cover no-repeat;
+    background: linear-gradient(135deg, rgba(30, 64, 175, 0.8) 0%, rgba(59, 130, 246, 0.8) 100%), url('images/banner-hero.jpg') center/cover no-repeat;
     min-height: 90vh;
     display: flex;
     align-items: center;
@@ -692,6 +692,17 @@ a {
     gap: 15px;
 }
 
+.contact-info a.contact-item {
+    text-decoration: none;
+    color: #94a3b8;
+    transition: all 0.3s ease;
+}
+
+.contact-info a.contact-item:hover {
+    color: var(--white);
+    padding-left: 8px;
+}
+
 .contact-item {
     display: flex;
     align-items: center;
@@ -731,37 +742,50 @@ a {
     color: var(--white);
 }
 
-/* Accordion para footer em desktop - sempre visível */
-.accordion-input {
+/* Accordion para mobile (será ativado via media query) */
+.accordion-toggle {
     display: none;
+    background: none;
+    border: none;
+    color: var(--white);
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem;
+    font-weight: 600;
+    cursor: pointer;
+    padding: 20px 0;
+    margin: 0;
+    width: 100%;
+    text-align: left;
+    justify-content: space-between;
+    align-items: center;
 }
 
-.footer-section .accordion-toggle {
-    cursor: default;
-    padding-right: 0;
+.accordion-content {
+    overflow: hidden;
+    transition: max-height 0.4s ease;
 }
 
-.footer-section .accordion-toggle i {
-    display: none;
+/* CORREÇÃO: Estilos específicos para o select do formulário */
+.form-group select {
+    cursor: pointer;
+    transition: all 0.3s ease;
 }
 
-.footer-section .accordion-content {
-    display: block !important;
+.form-group select option {
+    background-color: var(--white);
+    color: var(--gray-dark);
+    padding: 10px;
 }
 
-/* Garantir que os links do footer sejam sempre visíveis em desktop */
-@media (min-width: 769px) {
-    .footer-section .footer-links,
-    .footer-section .contact-info {
-        display: block !important;
-    }
-    
-    .footer-section h3 {
-        cursor: default !important;
-        padding-right: 0 !important;
-    }
-    
-    .accordion-toggle i {
-        display: none !important;
-    }
+.form-group select:invalid {
+    color: var(--gray-medium);
+}
+
+.form-group select:focus {
+    border-color: var(--primary-blue);
+    box-shadow: 0 0 0 3px rgba(30, 64, 175, 0.1);
+}
+
+.form-group select {
+    -webkit-tap-highlight-color: transparent;
 }
