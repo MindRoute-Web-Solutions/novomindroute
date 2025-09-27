@@ -53,7 +53,7 @@ const modalImg = document.getElementById('modal-img');
 const modalTitle = document.getElementById('modal-title');
 const modalDescription = document.getElementById('modal-description');
 
-// Dados dos projetos
+// Dados dos projetos (simulados)
 const portfolioData = {
     1: {
         title: 'Site Institucional - Empresa X',
@@ -113,12 +113,14 @@ faqItems.forEach(item => {
     const question = item.querySelector('.faq-question');
     
     question.addEventListener('click', () => {
+        // Fecha todas as outras FAQs
         faqItems.forEach(otherItem => {
             if (otherItem !== item) {
                 otherItem.classList.remove('active');
             }
         });
         
+        // Abre/Fecha a FAQ clicada
         item.classList.toggle('active');
     });
 });
@@ -130,15 +132,18 @@ const formSuccess = document.getElementById('form-success');
 contactForm.addEventListener('submit', (e) => {
     e.preventDefault();
     
-    // Coletar dados do formulário
-    const formData = new FormData(contactForm);
-    const data = Object.fromEntries(formData);
-    
-    // Aqui você pode adicionar o código para enviar para um servidor
-    console.log('Dados do formulário:', data);
-    
+    // Simulação de envio
     setTimeout(() => {
         contactForm.reset();
+        
+        // Remover classes filled dos campos
+        document.querySelectorAll('.form-group').forEach(group => {
+            group.classList.remove('filled');
+        });
+        document.querySelectorAll('.form-group input, .form-group select, .form-group textarea').forEach(field => {
+            field.classList.remove('filled');
+        });
+        
         contactForm.style.display = 'none';
         formSuccess.style.display = 'block';
         
@@ -149,34 +154,55 @@ contactForm.addEventListener('submit', (e) => {
     }, 1000);
 });
 
-// Efeito de preenchimento automático dos campos
+// Efeito de preenchimento automático dos campos do formulário - CORRIGIDO
 const formGroups = document.querySelectorAll('.form-group');
 
 formGroups.forEach(group => {
     const input = group.querySelector('input, select, textarea');
     
-    if (input.value) {
-        input.parentNode.classList.add('filled');
-    }
-    
-    input.addEventListener('input', () => {
+    if (input) {
+        // Verifica se o campo já tem valor ao carregar a página
         if (input.value) {
-            input.parentNode.classList.add('filled');
-        } else {
-            input.parentNode.classList.remove('filled');
+            group.classList.add('filled');
+            input.classList.add('filled');
         }
-    });
+        
+        input.addEventListener('input', () => {
+            if (input.value) {
+                group.classList.add('filled');
+                input.classList.add('filled');
+            } else {
+                group.classList.remove('filled');
+                input.classList.remove('filled');
+            }
+        });
+        
+        // Para select, verificar mudanças também
+        if (input.tagName === 'SELECT') {
+            input.addEventListener('change', () => {
+                if (input.value) {
+                    group.classList.add('filled');
+                    input.classList.add('filled');
+                } else {
+                    group.classList.remove('filled');
+                    input.classList.remove('filled');
+                }
+            });
+        }
+    }
 });
 
 // Header com efeito de scroll
 window.addEventListener('scroll', () => {
     const header = document.getElementById('header');
-    if (window.scrollY > 100) {
-        header.style.backgroundColor = 'rgba(255, 255, 255, 0.95)';
-        header.style.backdropFilter = 'blur(10px)';
-    } else {
-        header.style.backgroundColor = 'var(--white)';
-        header.style.backdropFilter = 'none';
+    if (header) {
+        if (window.scrollY > 100) {
+            header.style.backgroundColor = 'rgba(255, 255, 255, 0.95)';
+            header.style.backdropFilter = 'blur(10px)';
+        } else {
+            header.style.backgroundColor = 'var(--white)';
+            header.style.backdropFilter = 'none';
+        }
     }
 });
 
@@ -184,48 +210,107 @@ window.addEventListener('scroll', () => {
 const backToTopButton = document.querySelector('.back-to-top');
 
 window.addEventListener('scroll', () => {
-    if (window.pageYOffset > 300) {
-        backToTopButton.classList.add('show');
-    } else {
-        backToTopButton.classList.remove('show');
+    if (backToTopButton) {
+        if (window.pageYOffset > 300) {
+            backToTopButton.classList.add('show');
+        } else {
+            backToTopButton.classList.remove('show');
+        }
     }
 });
 
-backToTopButton.addEventListener('click', (e) => {
-    e.preventDefault();
-    window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
+if (backToTopButton) {
+    backToTopButton.addEventListener('click', (e) => {
+        e.preventDefault();
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
     });
+}
+
+// CORREÇÃO DEFINITIVA: Problema do select no formulário
+document.addEventListener('DOMContentLoaded', function() {
+    const selectElement = document.getElementById('servico');
+    
+    if (selectElement) {
+        // Marcar como preenchido se já tiver valor
+        if (selectElement.value) {
+            selectElement.parentElement.classList.add('filled');
+            selectElement.classList.add('filled');
+        }
+        
+        selectElement.addEventListener('focus', function() {
+            this.parentElement.classList.add('select-focused');
+        });
+        
+        selectElement.addEventListener('blur', function() {
+            this.parentElement.classList.remove('select-focused');
+        });
+        
+        selectElement.addEventListener('change', function() {
+            if (this.value) {
+                this.parentElement.classList.add('filled');
+                this.classList.add('filled');
+            } else {
+                this.parentElement.classList.remove('filled');
+                this.classList.remove('filled');
+            }
+        });
+    }
 });
 
-// Accordion para footer mobile
+// ACCORDION DO FOOTER PARA MOBILE - CORRIGIDO
 function initFooterAccordion() {
     const footerSections = document.querySelectorAll('.footer-section');
-    const windowWidth = window.innerWidth;
+    const isMobile = window.innerWidth <= 768;
     
-    if (windowWidth <= 768) {
-        // Comportamento para mobile - accordion
+    // Limpar accordions existentes para evitar duplicação
+    footerSections.forEach(section => {
+        const existingToggle = section.querySelector('.footer-accordion-toggle');
+        const existingContent = section.querySelector('.footer-accordion-content');
+        
+        if (existingToggle) existingToggle.remove();
+        if (existingContent) existingContent.remove();
+        
+        section.classList.remove('active');
+    });
+    
+    if (isMobile) {
+        // MOBILE: Criar accordion apenas para as seções de conteúdo
         footerSections.forEach((section, index) => {
             // Pular a primeira seção (logo)
             if (index === 0) return;
             
-            // Criar botão accordion
-            const toggle = document.createElement('button');
-            toggle.className = 'accordion-toggle';
-            toggle.innerHTML = `
-                <span>${section.querySelector('h3').textContent}</span>
-                <i class="fas fa-chevron-down"></i>
-            `;
+            const sectionTitle = section.querySelector('h3');
+            if (!sectionTitle) return;
             
-            // Inserir antes do conteúdo
-            section.insertBefore(toggle, section.firstChild);
+            // Criar botão do accordion
+            const toggleButton = document.createElement('button');
+            toggleButton.className = 'footer-accordion-toggle';
+            toggleButton.innerHTML = `${sectionTitle.textContent} <i class="fas fa-chevron-down"></i>`;
             
-            // Fechar todos os accordions inicialmente
-            section.classList.remove('active');
+            // Criar container para o conteúdo
+            const contentDiv = document.createElement('div');
+            contentDiv.className = 'footer-accordion-content';
             
-            toggle.addEventListener('click', function(e) {
-                e.preventDefault();
+            // Mover todo o conteúdo (exceto o título) para o container
+            const children = Array.from(section.children);
+            children.forEach(child => {
+                if (child !== sectionTitle) {
+                    contentDiv.appendChild(child);
+                }
+            });
+            
+            // Adicionar elementos à seção
+            section.appendChild(toggleButton);
+            section.appendChild(contentDiv);
+            
+            // Esconder título original
+            sectionTitle.style.display = 'none';
+            
+            // Event listener simples e eficaz
+            toggleButton.addEventListener('click', function(e) {
                 e.stopPropagation();
                 
                 // Fechar todos os outros accordions
@@ -239,25 +324,40 @@ function initFooterAccordion() {
                 section.classList.toggle('active');
             });
         });
-        
-        // Fechar accordions ao clicar fora
-        document.addEventListener('click', function(e) {
-            if (!e.target.closest('.footer-section')) {
-                footerSections.forEach(section => {
-                    if (section !== footerSections[0]) {
-                        section.classList.remove('active');
-                    }
-                });
-            }
-        });
     } else {
-        // Comportamento para desktop - remover accordion
+        // DESKTOP: Garantir que esteja no estado normal
         footerSections.forEach(section => {
-            const toggle = section.querySelector('.accordion-toggle');
-            if (toggle) {
-                toggle.remove();
+            const sectionTitle = section.querySelector('h3');
+            if (sectionTitle) {
+                sectionTitle.style.display = 'block';
             }
-            section.classList.add('active');
+            section.classList.remove('active');
+        });
+    }
+}
+
+// Fechar accordions ao clicar fora
+document.addEventListener('click', function(e) {
+    if (window.innerWidth <= 768) {
+        const footerSections = document.querySelectorAll('.footer-section');
+        if (!e.target.closest('.footer-section')) {
+            footerSections.forEach(section => {
+                if (section !== footerSections[0]) {
+                    section.classList.remove('active');
+                }
+            });
+        }
+    }
+});
+
+// CORREÇÃO: Ajustar scroll para não ficar sob o header
+function fixMobileScroll() {
+    if (window.innerWidth <= 768) {
+        const headerHeight = document.getElementById('header').offsetHeight;
+        const sections = document.querySelectorAll('.servicos, .portfolio, .importancia, .faq, .sobre, .contato');
+        
+        sections.forEach(section => {
+            section.style.paddingTop = (headerHeight + 50) + 'px';
         });
     }
 }
@@ -265,9 +365,18 @@ function initFooterAccordion() {
 // Inicializar quando o DOM estiver pronto
 document.addEventListener('DOMContentLoaded', function() {
     initFooterAccordion();
+    fixMobileScroll();
     
-    // Re-inicializar ao redimensionar
-    window.addEventListener('resize', function() {
-        initFooterAccordion();
-    });
+    // Garantir que o select funcione perfeitamente
+    const selectElement = document.getElementById('servico');
+    if (selectElement) {
+        selectElement.style.pointerEvents = 'auto';
+        selectElement.style.zIndex = '1000';
+    }
+});
+
+// Re-inicializar ao redimensionar
+window.addEventListener('resize', function() {
+    initFooterAccordion();
+    fixMobileScroll();
 });

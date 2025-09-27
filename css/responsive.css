@@ -73,7 +73,22 @@
         font-size: 1.3rem;
     }
     
-    /* Header Mobile */
+    /* CORREÇÃO: Ajustar padding das seções para não ficar sob o header */
+    .servicos,
+    .portfolio, 
+    .importancia,
+    .faq,
+    .sobre,
+    .contato {
+        padding: 120px 0 80px 0 !important;
+    }
+    
+    /* Header Mobile - CORRIGIDO */
+    #header {
+        z-index: 1000 !important;
+        position: fixed !important;
+    }
+    
     .nav-menu {
         position: fixed;
         top: 70px;
@@ -144,58 +159,33 @@
     }
     
     /* Serviços Mobile */
-    .servicos {
-        padding: 80px 0;
-    }
-    
     .servicos-grid {
         grid-template-columns: 1fr;
     }
     
     /* Portfólio Mobile */
-    .portfolio {
-        padding: 80px 0;
-    }
-    
     .portfolio-grid {
         grid-template-columns: 1fr;
     }
     
     /* Importância Mobile */
-    .importancia {
-        padding: 80px 0;
-    }
-    
     .importancia-grid {
         grid-template-columns: 1fr;
     }
     
     /* FAQ Mobile */
-    .faq {
-        padding: 80px 0;
-    }
-    
     .faq-question h3 {
         font-size: 1.1rem;
         margin-right: 15px;
     }
     
     /* Sobre Mobile */
-    .sobre {
-        padding: 80px 0;
-    }
-    
     .sobre-content {
         flex-direction: column;
     }
     
     .sobre-text {
         margin-bottom: 30px;
-    }
-    
-    /* Contato Mobile */
-    .contato {
-        padding: 80px 0;
     }
     
     /* CORREÇÃO: Problema do select no formulário em mobile */
@@ -215,6 +205,38 @@
         background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%231e40af' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
     }
     
+    /* CORREÇÃO DEFINITIVA PARA O SELECT */
+    .form-group select {
+        pointer-events: auto !important;
+        z-index: 1000 !important;
+        position: relative !important;
+    }
+    
+    /* CORREÇÃO: Label do select "Serviço de Interesse" */
+    .form-group select:focus ~ label,
+    .form-group select:valid ~ label,
+    .form-group select.filled ~ label {
+        top: -10px !important;
+        left: 10px !important;
+        font-size: 0.8rem !important;
+        background-color: var(--white) !important;
+        padding: 0 5px !important;
+        color: var(--primary-blue) !important;
+        z-index: 1000 !important;
+    }
+    
+    /* Garantir que o label fique acima do select */
+    .form-group label {
+        z-index: 2 !important;
+        pointer-events: none !important;
+    }
+    
+    /* Garantir que o formulário tenha prioridade */
+    .contato-form {
+        z-index: 1000;
+        position: relative;
+    }
+    
     /* FOOTER MOBILE COM ACCORDION */
     .footer {
         padding: 40px 0 0;
@@ -227,12 +249,8 @@
     
     .footer-section {
         border-bottom: 1px solid #334155;
-        padding: 0;
-    }
-    
-    .footer-section:first-child {
-        border-bottom: 1px solid #334155;
         padding: 20px 0;
+        position: relative;
     }
     
     .footer-section:last-child {
@@ -240,51 +258,54 @@
     }
     
     /* Accordion Styles para Mobile */
-    .accordion-toggle {
-        display: flex !important;
+    .footer-accordion-toggle {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        background: none;
+        border: none;
+        color: var(--white);
+        font-family: 'Playfair Display', serif;
+        font-size: 1.2rem;
+        font-weight: 600;
+        cursor: pointer;
+        padding: 15px 0;
+        text-align: left;
     }
     
-    .accordion-toggle i {
+    .footer-accordion-toggle i {
         font-size: 0.9rem;
         transition: transform 0.3s ease;
     }
     
-    .accordion-content {
+    .footer-accordion-content {
         max-height: 0;
         overflow: hidden;
+        transition: max-height 0.4s ease;
     }
     
-    .footer-section.active .accordion-content {
+    .footer-section.active .footer-accordion-content {
         max-height: 500px;
-        padding-bottom: 20px;
     }
     
-    .footer-section.active .accordion-toggle i {
+    .footer-section.active .footer-accordion-toggle i {
         transform: rotate(180deg);
     }
     
     /* Esconder os títulos h3 no mobile e mostrar accordion */
-    .footer-section h3 {
+    .footer-section:not(:first-child) h3 {
         display: none;
     }
     
-    .footer-links {
-        margin: 0;
-        padding: 0;
+    .footer-section:first-child .footer-accordion-toggle {
+        display: none;
     }
     
-    .footer-links li {
-        margin-bottom: 10px;
-    }
-    
-    .footer-links a {
-        padding: 8px 0;
-        display: block;
-    }
-    
-    .contact-info a.contact-item {
-        padding: 8px 0;
-        display: flex;
+    /* Isolar o accordion para não interferir em outros elementos */
+    .footer-accordion-content {
+        z-index: 1;
+        position: relative;
     }
     
     .footer-social {
@@ -300,7 +321,8 @@
     
     .footer-legal {
         justify-content: center;
-        flex-wrap: wrap;
+        flex-direction: column;
+        gap: 10px;
     }
     
     /* Botões flutuantes em mobile */
@@ -323,7 +345,7 @@
 
 /* Desktop: acima de 768px - Esconder accordion */
 @media (min-width: 769px) {
-    .accordion-toggle {
+    .footer-accordion-toggle {
         display: none !important;
     }
     
@@ -331,14 +353,20 @@
         display: block !important;
     }
     
-    .accordion-content {
+    .footer-accordion-content {
         max-height: none !important;
         overflow: visible !important;
         display: block !important;
     }
     
-    .footer-section {
-        padding: 0 !important;
+    /* Restaurar padding normal para desktop */
+    .servicos,
+    .portfolio,
+    .importancia,
+    .faq,
+    .sobre,
+    .contato {
+        padding: 100px 0 !important;
     }
 }
 
@@ -373,6 +401,16 @@
         padding: 20px;
     }
     
+    /* Ajustar padding para mobile pequeno */
+    .servicos,
+    .portfolio,
+    .importancia,
+    .faq,
+    .sobre,
+    .contato {
+        padding: 100px 0 60px 0 !important;
+    }
+    
     /* Footer Mobile Pequeno */
     .footer {
         padding: 30px 0 0;
@@ -383,11 +421,12 @@
     }
     
     .footer-section {
-        padding: 0;
+        padding: 15px 0;
     }
     
-    .footer-section:first-child {
-        padding: 15px 0;
+    .footer-section h3 {
+        font-size: 1.1rem;
+        margin-bottom: 15px;
     }
     
     .footer-logo h2 {
@@ -459,6 +498,16 @@
     .footer-section:first-child {
         grid-column: 1 / -1;
     }
+    
+    /* Ajustar padding para landscape */
+    .servicos,
+    .portfolio,
+    .importancia,
+    .faq,
+    .sobre,
+    .contato {
+        padding: 100px 0 60px 0 !important;
+    }
 }
 
 /* Ajustes para telas muito pequenas (menos de 360px) */
@@ -471,8 +520,12 @@
         gap: 0;
     }
     
-    .footer-section:first-child {
+    .footer-section {
         padding: 12px 0;
+    }
+    
+    .footer-section h3 {
+        font-size: 1rem;
     }
     
     .footer-logo h2 {
@@ -482,7 +535,6 @@
     .social-link {
         width: 32px;
         height: 32px;
-        font-size: 0.9rem;
     }
     
     .footer-links a {
@@ -491,6 +543,16 @@
     
     .contact-item {
         font-size: 0.85rem;
+    }
+    
+    /* Ajustar padding para telas muito pequenas */
+    .servicos,
+    .portfolio,
+    .importancia,
+    .faq,
+    .sobre,
+    .contato {
+        padding: 80px 0 50px 0 !important;
     }
     
     /* Botões flutuantes em telas muito pequenas */
@@ -511,16 +573,9 @@
     }
 }
 
-/* Animações */
 @keyframes fadeIn {
-    from { 
-        opacity: 0; 
-        transform: translateY(-10px); 
-    }
-    to { 
-        opacity: 1; 
-        transform: translateY(0); 
-    }
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
 @keyframes slideDown {
@@ -534,24 +589,15 @@
     }
 }
 
-@keyframes slideIn {
-    from {
-        transform: translateX(-100%);
-    }
-    to {
-        transform: translateX(0);
-    }
+/* Animações para o accordion */
+.footer-section.active .footer-accordion-content {
+    animation: slideDown 0.4s ease-out;
 }
 
-/* Utilidades para animações */
 .fade-in {
     animation: fadeIn 0.6s ease-in-out;
 }
 
 .slide-down {
     animation: slideDown 0.5s ease-out;
-}
-
-.slide-in {
-    animation: slideIn 0.4s ease-out;
 }
