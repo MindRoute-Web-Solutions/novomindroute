@@ -260,8 +260,12 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 
-// ACCORDION DO FOOTER PARA MOBILE - CORRIGIDO
+// ACCORDION DO FOOTER APENAS PARA MOBILE - CORREÇÃO DEFINITIVA
 function initFooterAccordion() {
+    // ⬇️⬇️⬇️ LINHA CRÍTICA ADICIONADA ⬇️⬇️⬇️
+    if (window.innerWidth > 768) return;
+    // ⬆️⬆️⬆️ SAIR DA FUNÇÃO SE FOR DESKTOP ⬆️⬆️⬆️
+    
     const footerSections = document.querySelectorAll('.footer-section');
     const isMobile = window.innerWidth <= 768;
     
