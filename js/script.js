@@ -154,7 +154,7 @@ contactForm.addEventListener('submit', (e) => {
     }, 1000);
 });
 
-// Efeito de preenchimento automático dos campos do formulário - CORRIGIDO
+// Efeito de preenchimento automático dos campos do formulário
 const formGroups = document.querySelectorAll('.form-group');
 
 formGroups.forEach(group => {
@@ -229,37 +229,6 @@ if (backToTopButton) {
     });
 }
 
-// CORREÇÃO DEFINITIVA: Problema do select no formulário
-document.addEventListener('DOMContentLoaded', function() {
-    const selectElement = document.getElementById('servico');
-    
-    if (selectElement) {
-        // Marcar como preenchido se já tiver valor
-        if (selectElement.value) {
-            selectElement.parentElement.classList.add('filled');
-            selectElement.classList.add('filled');
-        }
-        
-        selectElement.addEventListener('focus', function() {
-            this.parentElement.classList.add('select-focused');
-        });
-        
-        selectElement.addEventListener('blur', function() {
-            this.parentElement.classList.remove('select-focused');
-        });
-        
-        selectElement.addEventListener('change', function() {
-            if (this.value) {
-                this.parentElement.classList.add('filled');
-                this.classList.add('filled');
-            } else {
-                this.parentElement.classList.remove('filled');
-                this.classList.remove('filled');
-            }
-        });
-    }
-});
-
 // ACCORDION DO FOOTER APENAS PARA MOBILE - CORREÇÃO DEFINITIVA
 function initFooterAccordion() {
     // ⬇️⬇️⬇️ LINHA CRÍTICA ADICIONADA ⬇️⬇️⬇️
@@ -267,7 +236,6 @@ function initFooterAccordion() {
     // ⬆️⬆️⬆️ SAIR DA FUNÇÃO SE FOR DESKTOP ⬆️⬆️⬆️
     
     const footerSections = document.querySelectorAll('.footer-section');
-    const isMobile = window.innerWidth <= 768;
     
     // Limpar accordions existentes para evitar duplicação
     footerSections.forEach(section => {
@@ -280,64 +248,53 @@ function initFooterAccordion() {
         section.classList.remove('active');
     });
     
-    if (isMobile) {
-        // MOBILE: Criar accordion apenas para as seções de conteúdo
-        footerSections.forEach((section, index) => {
-            // Pular a primeira seção (logo)
-            if (index === 0) return;
+    // MOBILE: Criar accordion apenas para as seções de conteúdo
+    footerSections.forEach((section, index) => {
+        // Pular a primeira seção (logo)
+        if (index === 0) return;
+        
+        const sectionTitle = section.querySelector('h3');
+        if (!sectionTitle) return;
+        
+        // Criar botão do accordion
+        const toggleButton = document.createElement('button');
+        toggleButton.className = 'footer-accordion-toggle';
+        toggleButton.innerHTML = `${sectionTitle.textContent} <i class="fas fa-chevron-down"></i>`;
+        
+        // Criar container para o conteúdo
+        const contentDiv = document.createElement('div');
+        contentDiv.className = 'footer-accordion-content';
+        
+        // Mover todo o conteúdo (exceto o título) para o container
+        const children = Array.from(section.children);
+        children.forEach(child => {
+            if (child !== sectionTitle) {
+                contentDiv.appendChild(child);
+            }
+        });
+        
+        // Adicionar elementos à seção
+        section.appendChild(toggleButton);
+        section.appendChild(contentDiv);
+        
+        // Esconder título original
+        sectionTitle.style.display = 'none';
+        
+        // Event listener simples e eficaz
+        toggleButton.addEventListener('click', function(e) {
+            e.stopPropagation();
             
-            const sectionTitle = section.querySelector('h3');
-            if (!sectionTitle) return;
-            
-            // Criar botão do accordion
-            const toggleButton = document.createElement('button');
-            toggleButton.className = 'footer-accordion-toggle';
-            toggleButton.innerHTML = `${sectionTitle.textContent} <i class="fas fa-chevron-down"></i>`;
-            
-            // Criar container para o conteúdo
-            const contentDiv = document.createElement('div');
-            contentDiv.className = 'footer-accordion-content';
-            
-            // Mover todo o conteúdo (exceto o título) para o container
-            const children = Array.from(section.children);
-            children.forEach(child => {
-                if (child !== sectionTitle) {
-                    contentDiv.appendChild(child);
+            // Fechar todos os outros accordions
+            footerSections.forEach(otherSection => {
+                if (otherSection !== section && otherSection !== footerSections[0]) {
+                    otherSection.classList.remove('active');
                 }
             });
             
-            // Adicionar elementos à seção
-            section.appendChild(toggleButton);
-            section.appendChild(contentDiv);
-            
-            // Esconder título original
-            sectionTitle.style.display = 'none';
-            
-            // Event listener simples e eficaz
-            toggleButton.addEventListener('click', function(e) {
-                e.stopPropagation();
-                
-                // Fechar todos os outros accordions
-                footerSections.forEach(otherSection => {
-                    if (otherSection !== section && otherSection !== footerSections[0]) {
-                        otherSection.classList.remove('active');
-                    }
-                });
-                
-                // Alternar o accordion clicado
-                section.classList.toggle('active');
-            });
+            // Alternar o accordion clicado
+            section.classList.toggle('active');
         });
-    } else {
-        // DESKTOP: Garantir que esteja no estado normal
-        footerSections.forEach(section => {
-            const sectionTitle = section.querySelector('h3');
-            if (sectionTitle) {
-                sectionTitle.style.display = 'block';
-            }
-            section.classList.remove('active');
-        });
-    }
+    });
 }
 
 // Fechar accordions ao clicar fora
@@ -370,13 +327,6 @@ function fixMobileScroll() {
 document.addEventListener('DOMContentLoaded', function() {
     initFooterAccordion();
     fixMobileScroll();
-    
-    // Garantir que o select funcione perfeitamente
-    const selectElement = document.getElementById('servico');
-    if (selectElement) {
-        selectElement.style.pointerEvents = 'auto';
-        selectElement.style.zIndex = '1000';
-    }
 });
 
 // Re-inicializar ao redimensionar
