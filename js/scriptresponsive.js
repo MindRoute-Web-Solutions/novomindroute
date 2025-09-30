@@ -73,22 +73,6 @@ window.addEventListener('scroll', function() {
     }, 100);
 });
 
-// Ajustar altura de elementos com base na viewport
-function adjustHeights() {
-    const vh = window.innerHeight * 0.01;
-    document.documentElement.style.setProperty('--vh', `${vh}px`);
-    
-    // Ajustar altura da seção hero para ocupar a tela inteira
-    const hero = document.querySelector('.hero');
-    if (hero) {
-        const headerHeight = document.getElementById('header').offsetHeight;
-        hero.style.minHeight = `calc(100vh - ${headerHeight}px)`;
-    }
-}
-
-window.addEventListener('load', adjustHeights);
-window.addEventListener('resize', adjustHeights);
-
 // Otimização de imagens para diferentes densidades de pixel
 function optimizeImages() {
     const images = document.querySelectorAll('img');

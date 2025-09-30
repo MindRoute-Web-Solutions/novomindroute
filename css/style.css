@@ -512,13 +512,13 @@ a {
 .form-group select:focus ~ label,
 .form-group select:valid ~ label,
 .form-group select.filled ~ label {
-    top: -10px !important;
-    left: 10px !important;
-    font-size: 0.8rem !important;
-    background-color: var(--white) !important;
-    padding: 0 5px !important;
-    color: var(--primary-blue) !important;
-    z-index: 1000 !important;
+    top: -10px;
+    left: 10px;
+    font-size: 0.8rem;
+    background-color: var(--white);
+    padding: 0 5px;
+    color: var(--primary-blue);
+    z-index: 1000;
 }
 
 .form-group input:focus ~ label,

@@ -229,35 +229,62 @@ if (backToTopButton) {
     });
 }
 
-// ACCORDION DO FOOTER APENAS PARA MOBILE - CORREÇÃO DEFINITIVA
+// ACCORDION DO FOOTER - VERSÃO CORRIGIDA E ESTÁVEL
 function initFooterAccordion() {
-    // ⬇️⬇️⬇️ LINHA CRÍTICA ADICIONADA ⬇️⬇️⬇️
-    if (window.innerWidth > 768) return;
-    // ⬆️⬆️⬆️ SAIR DA FUNÇÃO SE FOR DESKTOP ⬆️⬆️⬆️
+    // Sair se for desktop
+    if (window.innerWidth > 768) {
+        // Garantir que esteja no estado normal em desktop
+        const footerSections = document.querySelectorAll('.footer-section');
+        footerSections.forEach(section => {
+            section.classList.remove('active');
+            const toggle = section.querySelector('.footer-accordion-toggle');
+            const content = section.querySelector('.footer-accordion-content');
+            if (toggle) toggle.remove();
+            if (content) {
+                // Restaurar conteúdo para posição original
+                const children = Array.from(content.children);
+                children.forEach(child => {
+                    section.appendChild(child);
+                });
+                content.remove();
+            }
+            // Mostrar título original
+            const title = section.querySelector('h3');
+            if (title) title.style.display = 'block';
+        });
+        return;
+    }
     
+    // MOBILE: Criar accordion
     const footerSections = document.querySelectorAll('.footer-section');
     
-    // Limpar accordions existentes para evitar duplicação
+    // Limpar accordions existentes
     footerSections.forEach(section => {
         const existingToggle = section.querySelector('.footer-accordion-toggle');
         const existingContent = section.querySelector('.footer-accordion-content');
         
         if (existingToggle) existingToggle.remove();
-        if (existingContent) existingContent.remove();
+        if (existingContent) {
+            const children = Array.from(existingContent.children);
+            children.forEach(child => {
+                section.appendChild(child);
+            });
+            existingContent.remove();
+        }
         
         section.classList.remove('active');
     });
-    
-    // MOBILE: Criar accordion apenas para as seções de conteúdo
+
+    // Criar accordions apenas para seções de conteúdo (não a primeira)
     footerSections.forEach((section, index) => {
-        // Pular a primeira seção (logo)
-        if (index === 0) return;
+        if (index === 0) return; // Pular primeira seção (logo)
         
         const sectionTitle = section.querySelector('h3');
         if (!sectionTitle) return;
-        
+
         // Criar botão do accordion
         const toggleButton = document.createElement('button');
+        toggleButton.type = 'button'; // IMPORTANTE: evitar submit de form
         toggleButton.className = 'footer-accordion-toggle';
         toggleButton.innerHTML = `${sectionTitle.textContent} <i class="fas fa-chevron-down"></i>`;
         
@@ -265,11 +292,12 @@ function initFooterAccordion() {
         const contentDiv = document.createElement('div');
         contentDiv.className = 'footer-accordion-content';
         
-        // Mover todo o conteúdo (exceto o título) para o container
+        // Mover conteúdo para o container (exceto o título)
         const children = Array.from(section.children);
         children.forEach(child => {
-            if (child !== sectionTitle) {
-                contentDiv.appendChild(child);
+            if (child !== sectionTitle && !child.classList.contains('footer-accordion-toggle')) {
+                contentDiv.appendChild(child.cloneNode(true));
+                child.remove(); // Remover original
             }
         });
         
@@ -280,9 +308,12 @@ function initFooterAccordion() {
         // Esconder título original
         sectionTitle.style.display = 'none';
         
-        // Event listener simples e eficaz
+        // Event listener MELHORADO
         toggleButton.addEventListener('click', function(e) {
+            e.preventDefault();
             e.stopPropagation();
+            
+            const isActive = section.classList.contains('active');
             
             // Fechar todos os outros accordions
             footerSections.forEach(otherSection => {
@@ -297,20 +328,6 @@ function initFooterAccordion() {
     });
 }
 
-// Fechar accordions ao clicar fora
-document.addEventListener('click', function(e) {
-    if (window.innerWidth <= 768) {
-        const footerSections = document.querySelectorAll('.footer-section');
-        if (!e.target.closest('.footer-section')) {
-            footerSections.forEach(section => {
-                if (section !== footerSections[0]) {
-                    section.classList.remove('active');
-                }
-            });
-        }
-    }
-});
-
 // CORREÇÃO: Ajustar scroll para não ficar sob o header
 function fixMobileScroll() {
     if (window.innerWidth <= 768) {
@@ -320,17 +337,68 @@ function fixMobileScroll() {
         sections.forEach(section => {
             section.style.paddingTop = (headerHeight + 50) + 'px';
         });
+    } else {
+        // Restaurar padding normal para desktop
+        const sections = document.querySelectorAll('.servicos, .portfolio, .importancia, .faq, .sobre, .contato');
+        sections.forEach(section => {
+            section.style.paddingTop = '';
+        });
+    }
+}
+
+// CORREÇÃO PARA DEVTOLS - Observar mudanças no viewport
+function handleViewportChange() {
+    initFooterAccordion();
+    fixMobileScroll();
+}
+
+// Observar mudanças no viewport do DevTools
+let currentViewport = window.innerWidth;
+
+function checkViewportChange() {
+    if (window.innerWidth !== currentViewport) {
+        currentViewport = window.innerWidth;
+        handleViewportChange();
+    }
+}
+
+// Event listener seguro para clicks fora do accordion
+function handleClickOutsideAccordion(e) {
+    if (window.innerWidth <= 768) {
+        const footerSections = document.querySelectorAll('.footer-section');
+        const isAccordionToggle = e.target.closest('.footer-accordion-toggle');
+        const isInsideFooter = e.target.closest('.footer-section');
+        
+        if (!isAccordionToggle && isInsideFooter) {
+            // Clicou dentro do footer mas não no toggle - não fazer nada
+            return;
+        }
+        
+        if (!isInsideFooter) {
+            // Clicou fora do footer - fechar todos
+            footerSections.forEach(section => {
+                if (section !== footerSections[0]) {
+                    section.classList.remove('active');
+                }
+            });
+        }
     }
 }
 
 // Inicializar quando o DOM estiver pronto
-document.addEventListener('DOMContentLoaded', function() {
-    initFooterAccordion();
-    fixMobileScroll();
-});
-
-// Re-inicializar ao redimensionar
-window.addEventListener('resize', function() {
-    initFooterAccordion();
-    fixMobileScroll();
-});
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', function() {
+        setTimeout(initFooterAccordion, 100);
+        setTimeout(fixMobileScroll, 100);
+        setInterval(checkViewportChange, 500);
+        document.addEventListener('click', handleClickOutsideAccordion);
+        window.addEventListener('resize', handleViewportChange);
+    });
+} else {
+    // DOM já está pronto
+    setTimeout(initFooterAccordion, 100);
+    setTimeout(fixMobileScroll, 100);
+    setInterval(checkViewportChange, 500);
+    document.addEventListener('click', handleClickOutsideAccordion);
+    window.addEventListener('resize', handleViewportChange);
+}
