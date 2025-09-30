@@ -56,24 +56,24 @@ const modalDescription = document.getElementById('modal-description');
 // Dados dos projetos (simulados)
 const portfolioData = {
     1: {
-        title: 'Site Institucional - Empresa X',
-        description: 'Desenvolvimento de um site institucional moderno e responsivo para a Empresa X, com foco na apresentação de seus serviços e fortalecimento da marca no mercado digital.',
-        image: 'images/portfolio-1.jpg'
+        title: 'AutoMecânica Show - Site institucional para oficina mecânica',
+        description: 'Site institucional desenvolvido para oficina mecânica, com foco em captação de clientes locais através de design profissional e informações estratégicas.',
+        image: 'images/mecanica.png'
     },
     2: {
-        title: 'Landing Page - Produto Y',
-        description: 'Criação de uma landing page otimizada para conversão do Produto Y, com design persuasivo e call-to-actions estratégicos que resultaram em aumento significativo de leads.',
-        image: 'images/portfolio-2.jpg'
+        title: 'Site Imobiliário - Plataforma para Corretora',
+        description: 'Site institucional desenvolvido para imobiliária, apresentando catálogo de propriedades com design elegante e foco na conversão de leads qualificados.',
+        image: 'images/imobiliaria.png'
     },
     3: {
-        title: 'Blog - Especialista A',
-        description: 'Criação de um blog profissional para o Especialista A, com design clean, focado na experiência de leitura e otimizado para mecanismos de busca.',
-        image: 'images/portfolio-3.jpg'
+        title: 'Página de Vendas - Máquina Cortar Cabelo',
+        description: 'Página de vendas altamente otimizada para produto físico, focada em converter tráfego orgânico em vendas através de copy persuasiva e design estratégico.',
+        image: 'images/paginavendas.png'
     },
     4: {
-        title: 'Portfólio - Designer B',
-        description: 'Desenvolvimento de um portfólio online para o Designer B, destacando seus projetos e habilidades de forma elegante e profissional.',
-        image: 'images/portfolio-4.jpg'
+        title: 'Plataforma de Afiliados de Alta Conversão',
+        description: 'Desenvolvimento de loja virtual focada em marketing de afiliados, com arquitetura otimizada para maximizar conversões e proporcionar experiência de usuário superior.',
+        image: 'images/lojaafiliado.png'
     }
 };
 
