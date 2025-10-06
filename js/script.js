@@ -125,7 +125,7 @@ faqItems.forEach(item => {
     });
 });
 
-// Formulário de contato - ATUALIZADO PARA FORMSUBMIT
+// Formulário de contato - CORRIGIDO PARA FORMSUBMIT
 const contactForm = document.getElementById('contact-form');
 const formSuccess = document.getElementById('form-success');
 
@@ -174,29 +174,20 @@ contactForm.addEventListener('submit', function(e) {
         return;
     }
     
-    // Se tudo estiver válido, mostrar mensagem de sucesso
-    e.preventDefault(); // Remover esta linha quando o FormSubmit estiver configurado
+    // Se tudo estiver válido, permitir o envio para o FormSubmit
+    // O FormSubmit irá redirecionar para a página obrigado.html automaticamente
+    console.log('Formulário válido, enviando para FormSubmit...');
     
-    // Mostrar mensagem de sucesso
-    contactForm.style.display = 'none';
-    formSuccess.style.display = 'block';
+    // Opcional: Mostrar feedback visual de carregamento
+    const submitButton = contactForm.querySelector('button[type="submit"]');
+    const originalText = submitButton.textContent;
+    submitButton.textContent = 'Enviando...';
+    submitButton.disabled = true;
     
-    // Scroll para a mensagem de sucesso
-    formSuccess.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    
-    // Opcional: Reexibir o formulário após 5 segundos
+    // Restaurar botão após alguns segundos (caso haja algum problema no envio)
     setTimeout(() => {
-        contactForm.style.display = 'block';
-        formSuccess.style.display = 'none';
-        contactForm.reset();
-        
-        // Remover classes filled dos campos
-        document.querySelectorAll('.form-group').forEach(group => {
-            group.classList.remove('filled');
-        });
-        document.querySelectorAll('.form-group input, .form-group select, .form-group textarea').forEach(field => {
-            field.classList.remove('filled');
-        });
+        submitButton.textContent = originalText;
+        submitButton.disabled = false;
     }, 5000);
 });
 
