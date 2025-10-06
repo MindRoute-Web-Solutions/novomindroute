@@ -257,7 +257,14 @@
             <h2 class="section-title">Entre em Contato</h2>
             <div class="contato-content">
                 <div class="contato-form">
-                    <form id="contact-form">
+                    <!-- FORMULÁRIO COM FORMSUBMIT -->
+                    <form id="contact-form" action="https://formsubmit.co/mindroutewebsolutions@hotmail.com" method="POST">
+                        <!-- Configurações do FormSubmit -->
+                        <input type="hidden" name="_subject" value="Novo contato do site MindRoute">
+                        <input type="hidden" name="_template" value="table">
+                        <input type="hidden" name="_next" value="https://mindroute-web-solutions.github.io/novomindroute/obrigado.html">
+                        <input type="hidden" name="_captcha" value="false">
+                        
                         <div class="form-group">
                             <input type="text" id="nome" name="nome" required>
                             <label for="nome">Nome completo</label>
@@ -276,7 +283,7 @@
                         </div>
                         <div class="form-group">
                             <select id="servico" name="servico" required>
-                                <option disabled selected>Selecione um serviço</option>
+                                <option value="" disabled selected>Selecione um serviço</option>
                                 <option value="criacao-websites">Criação de Websites</option>
                                 <option value="landing-pages">Landing Pages</option>
                                 <option value="pagina-vendas">Página de Vendas</option>
@@ -354,9 +361,9 @@
                 <div class="footer-section">
                     <h3>Contato</h3>
                     <div class="contact-info">
-                        <a href="mailto:contato@mindroute.com" class="contact-item">
+                        <a href="mailto:mindroutewebsolutions@hotmail.com" class="contact-item">
                             <i class="fas fa-envelope"></i>
-                            <span>maindroutewebsolutions@hotmail.com</span>
+                            <span>mindroutewebsolutions@hotmail.com</span>
                         </a>
                         <a href="tel:5516991671150" class="contact-item">
                             <i class="fas fa-phone"></i>

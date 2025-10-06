@@ -125,15 +125,69 @@ faqItems.forEach(item => {
     });
 });
 
-// Formulário de contato
+// Formulário de contato - ATUALIZADO PARA FORMSUBMIT
 const contactForm = document.getElementById('contact-form');
 const formSuccess = document.getElementById('form-success');
 
-contactForm.addEventListener('submit', (e) => {
-    e.preventDefault();
+// Validação e feedback visual do formulário
+contactForm.addEventListener('submit', function(e) {
+    // Validação visual antes do envio
+    let isValid = true;
     
-    // Simulação de envio
+    // Verificar se todos os campos obrigatórios estão preenchidos
+    const requiredFields = contactForm.querySelectorAll('[required]');
+    requiredFields.forEach(field => {
+        if (!field.value.trim()) {
+            isValid = false;
+            field.style.borderColor = 'red';
+            
+            // Adicionar mensagem de erro temporária
+            const errorMsg = document.createElement('span');
+            errorMsg.className = 'error-message';
+            errorMsg.textContent = 'Este campo é obrigatório';
+            errorMsg.style.color = 'red';
+            errorMsg.style.fontSize = '0.8rem';
+            errorMsg.style.marginTop = '5px';
+            errorMsg.style.display = 'block';
+            
+            const formGroup = field.closest('.form-group');
+            const existingError = formGroup.querySelector('.error-message');
+            if (!existingError) {
+                formGroup.appendChild(errorMsg);
+            }
+        } else {
+            field.style.borderColor = '';
+            const errorMsg = field.closest('.form-group').querySelector('.error-message');
+            if (errorMsg) {
+                errorMsg.remove();
+            }
+        }
+    });
+    
+    if (!isValid) {
+        e.preventDefault();
+        // Scroll para o primeiro campo com erro
+        const firstError = contactForm.querySelector('[required]:invalid');
+        if (firstError) {
+            firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+        return;
+    }
+    
+    // Se tudo estiver válido, mostrar mensagem de sucesso
+    e.preventDefault(); // Remover esta linha quando o FormSubmit estiver configurado
+    
+    // Mostrar mensagem de sucesso
+    contactForm.style.display = 'none';
+    formSuccess.style.display = 'block';
+    
+    // Scroll para a mensagem de sucesso
+    formSuccess.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    
+    // Opcional: Reexibir o formulário após 5 segundos
     setTimeout(() => {
+        contactForm.style.display = 'block';
+        formSuccess.style.display = 'none';
         contactForm.reset();
         
         // Remover classes filled dos campos
@@ -143,15 +197,7 @@ contactForm.addEventListener('submit', (e) => {
         document.querySelectorAll('.form-group input, .form-group select, .form-group textarea').forEach(field => {
             field.classList.remove('filled');
         });
-        
-        contactForm.style.display = 'none';
-        formSuccess.style.display = 'block';
-        
-        setTimeout(() => {
-            formSuccess.style.display = 'none';
-            contactForm.style.display = 'block';
-        }, 5000);
-    }, 1000);
+    }, 5000);
 });
 
 // Efeito de preenchimento automático dos campos do formulário
@@ -175,6 +221,15 @@ formGroups.forEach(group => {
                 group.classList.remove('filled');
                 input.classList.remove('filled');
             }
+            
+            // Remover borda vermelha quando o usuário começar a digitar
+            if (input.style.borderColor === 'red') {
+                input.style.borderColor = '';
+                const errorMsg = group.querySelector('.error-message');
+                if (errorMsg) {
+                    errorMsg.remove();
+                }
+            }
         });
         
         // Para select, verificar mudanças também
@@ -186,6 +241,15 @@ formGroups.forEach(group => {
                 } else {
                     group.classList.remove('filled');
                     input.classList.remove('filled');
+                }
+                
+                // Remover borda vermelha quando o usuário selecionar uma opção
+                if (input.style.borderColor === 'red') {
+                    input.style.borderColor = '';
+                    const errorMsg = group.querySelector('.error-message');
+                    if (errorMsg) {
+                        errorMsg.remove();
+                    }
                 }
             });
         }
@@ -295,7 +359,7 @@ function initFooterAccordion() {
         // Mover conteúdo para o container (exceto o título)
         const children = Array.from(section.children);
         children.forEach(child => {
-            if (child !== sectionTitle && !child.classList.contains('footer-accordion-toggle')) {
+            if (child !== sectionTitle && !child.classList.contains('.footer-accordion-toggle')) {
                 contentDiv.appendChild(child.cloneNode(true));
                 child.remove(); // Remover original
             }

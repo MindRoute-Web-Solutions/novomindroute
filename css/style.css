@@ -797,3 +797,25 @@ a {
 .form-group select {
     -webkit-tap-highlight-color: transparent;
 }
+
+/* Estilos para mensagens de erro do formulário */
+.error-message {
+    color: #dc2626 !important;
+    font-size: 0.8rem !important;
+    margin-top: 5px !important;
+    display: block !important;
+}
+
+/* Melhorar a aparência dos campos com erro */
+.form-group input:invalid,
+.form-group select:invalid,
+.form-group textarea:invalid {
+    border-color: #dc2626 !important;
+}
+
+.form-group input:focus:invalid,
+.form-group select:focus:invalid,
+.form-group textarea:focus:invalid {
+    border-color: #dc2626 !important;
+    box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.1) !important;
+}
