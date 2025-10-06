@@ -178,6 +178,45 @@
         margin-bottom: 30px;
     }
     
+    /* CORREÇÃO: Modal do Portfólio em Mobile */
+    .modal-content {
+        width: 95%;
+        margin: 5% auto;
+        height: auto;
+        max-height: 90vh;
+        overflow-y: auto;
+    }
+    
+    .modal-body {
+        flex-direction: column;
+    }
+    
+    .modal-body img {
+        height: auto;
+        max-height: 50vh;
+        object-fit: contain;
+        border-radius: 10px 10px 0 0;
+    }
+    
+    .modal-text {
+        padding: 20px;
+    }
+    
+    .close-modal {
+        top: 10px;
+        right: 15px;
+        font-size: 1.5rem;
+        background: rgba(0, 0, 0, 0.7);
+        color: white;
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 100;
+    }
+    
     /* CORREÇÃO: Problema do select no formulário em mobile */
     .form-group select {
         font-size: 16px;
@@ -353,17 +392,22 @@
         padding: 20px;
     }
     
+    /* CORREÇÃO: Modal em telas pequenas */
     .modal-content {
-        width: 95%;
-        margin: 10% auto;
+        width: 98%;
+        margin: 2% auto;
     }
     
     .modal-body img {
-        height: 250px;
+        max-height: 40vh;
     }
     
-    .modal-text {
-        padding: 20px;
+    .modal-text h3 {
+        font-size: 1.3rem;
+    }
+    
+    .modal-text p {
+        font-size: 0.9rem;
     }
     
     /* Footer Mobile Pequeno */
@@ -453,6 +497,11 @@
     .footer-section:first-child {
         grid-column: 1 / -1;
     }
+    
+    /* CORREÇÃO: Modal em landscape */
+    .modal-body img {
+        max-height: 40vh;
+    }
 }
 
 /* Ajustes para telas muito pequenas (menos de 360px) */
@@ -488,6 +537,20 @@
     
     .contact-item {
         font-size: 0.85rem;
+    }
+    
+    /* CORREÇÃO: Modal em telas muito pequenas */
+    .modal-content {
+        width: 99%;
+        margin: 1% auto;
+    }
+    
+    .modal-body img {
+        max-height: 35vh;
+    }
+    
+    .modal-text {
+        padding: 15px;
     }
     
     /* Botões flutuantes em telas muito pequenas */
